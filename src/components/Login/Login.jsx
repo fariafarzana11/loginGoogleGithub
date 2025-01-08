@@ -6,26 +6,26 @@ import { useState } from "react";
 const Login = () => {
     const [user, setUser] = useState(null)
     const googleProvider = new GoogleAuthProvider()
+    const githubProvider = new GithubAuthProvider()
     const auth = getAuth(app)
     const loginWithGoogle = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 const SignInUser = result.user;
                 setUser(SignInUser)
-                console.log(user)
+                console.log(SignInUser)
             })
             .catch(err => {
                 console.log(err.message)
             })
     }
-
-    const githubProvider = new GithubAuthProvider()
+  
     const loginWithGithub = () => {
         signInWithPopup(auth, githubProvider)
             .then(result => {
-                const SignInUser = result.user;
-                setUser(SignInUser)
-                console.log(user)
+                const githubUser = result.user;
+                setUser(githubUser)
+                console.log(githubUser)
             })
             .catch(err => {
                 console.log(err.message)
@@ -53,7 +53,7 @@ const Login = () => {
                                 username: {user.displayName}
                             </p>
                             <p>Email: {user.email}</p>
-                            <img src={user.photoURL} alt="" />
+                            <img src={user.photoURL} alt="picture" />
 
                         </div>
                     }
